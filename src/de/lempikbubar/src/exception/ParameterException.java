@@ -3,6 +3,11 @@ package de.lempikbubar.src.exception;
 import de.lempikbubar.src.config.Statics;
 
 @SuppressWarnings("serial")
+/**
+ * Einfache Exception Klasse, die Daten für das Werfen von Parameter Exceptions enthält
+ * @author mlempik
+ *
+ */
 public class ParameterException extends Exception {
 	private int type;
 	private String message;
@@ -15,10 +20,10 @@ public class ParameterException extends Exception {
 	private void setMsg(int key){
 		switch (key) {
 		
-		case Statics.FIRST_PARAMETER_EXCEPTION:
+		case Statics.FIRST_PARAMETER_NOT_VALID:
 			message = Statics.FIRST_PARAMETER_EXCEPTION_MESSAGE;
 			break;
-		case Statics.SECOND_PARAMETER_EXCEPTION:	
+		case Statics.SECOND_PARAMETER_NOT_VALID:	
 			message = Statics.SECOND_PARAMETER_EXCEPTION_MESSAGE;
 			break;
 		default:
