@@ -104,7 +104,11 @@ public class SortierungUtil {
 				Sortierung.sortAlgorithm = Statics.INSERTION_SORT;
 			}else if(args[1].equals(Statics.MERGE_SORT)){
 				Sortierung.sortAlgorithm = Statics.MERGE_SORT;	
-			}else{
+			}else if(args[1].equals(Statics.QUICK_SORT)){
+				Sortierung.sortAlgorithm = Statics.QUICK_SORT;
+			}
+			else
+			{
 				throw new ParameterException(Statics.THIRD_PARAMETER_NOT_VALID);
 			}
 			
@@ -122,6 +126,8 @@ public class SortierungUtil {
 				Sortierung.sortAlgorithm = Statics.INSERTION_SORT;
 			}else if(args[1].equals(Statics.MERGE_SORT)){
 				Sortierung.sortAlgorithm = Statics.MERGE_SORT;	
+			}else if(args[1].equals(Statics.QUICK_SORT)){
+				Sortierung.sortAlgorithm = Statics.QUICK_SORT;	
 			}else{
 				throw new ParameterException(Statics.THIRD_PARAMETER_NOT_VALID);
 			}

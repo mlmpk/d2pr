@@ -59,6 +59,42 @@ public class Sortierung {
         }
 		
 	}
+	
+	/**
+	 * Implementierung des Quicksort Algorithmus
+	 * @param array
+	 * @param l Linke Grenze
+	 * @param r Rechte Grenze
+	 */
+	public static void quickSort(int [] array, int l, int r){
+		
+		if(l < r){
+			int i = l;
+			int j = r;
+			int pivot = array[(l+r)/2];
+			
+			while(i <= j){
+				while(array[i]< pivot){
+					i++;
+				}
+				while(array[j] > pivot){
+					j--;
+				}
+				if(i <= j){
+					int tmp = array[i];
+					array[i] = array[j];
+					array[j] = tmp;
+					i++;
+					j--;
+				}
+			}
+			quickSort(array, l, j);
+			quickSort(array, i, r);
+		}
+		
+	}
+	
+	
 
 	/**
 	 * Die Methode merge() fügt geteilten Arrays aufsteigend sortiert wieder zusammen
@@ -162,6 +198,13 @@ public class Sortierung {
 				long start = System.currentTimeMillis();   	   // Zeitstempel für Laufzeit-Messung für Insertion Sort
 				mergeSort(array); 							   // Aufruf der Sortierungsroutine
 				runtime = System.currentTimeMillis() - start;  // Laufzeitberechnung
+			}else if( sortAlgorithm.equals( Statics.QUICK_SORT)){
+				System.out.println("\nNutze Sortieralgorithmus: "+ Statics.QUICK_SORT);
+				
+				long start = System.currentTimeMillis();   	   // Zeitstempel für Laufzeit-Messung für Insertion Sort
+				quickSort(array, 0, array.length-1); 		   // Aufruf der Sortierungsroutine
+				runtime = System.currentTimeMillis() - start;  // Laufzeitberechnung
+				
 			}
 			
 			System.out.println("\nDie Laufzeit des Sortieralgorithmus beträgt: " + runtime + "ms.");

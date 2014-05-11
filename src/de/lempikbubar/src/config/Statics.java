@@ -24,5 +24,6 @@ public class Statics {
 	
 	public static final String MERGE_SORT     = "merge";
 	public static final String INSERTION_SORT = "insert";
+	public static final String QUICK_SORT = "quick";
 	
 }
