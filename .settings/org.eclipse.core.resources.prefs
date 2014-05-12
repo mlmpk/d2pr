@@ -1,5 +1,11 @@
 eclipse.preferences.version=1
 encoding//src/de/lempikbubar/src/Sortierung.java=UTF-8
 encoding//src/de/lempikbubar/src/SortierungUtil.java=UTF-8
+encoding//src/de/lempikbubar/src/blatt04/Application.java=UTF-8
+encoding//src/de/lempikbubar/src/blatt04/ConvexHull.java=UTF-8
+encoding//src/de/lempikbubar/src/blatt04/DifferentDimensionException.java=UTF-8
+encoding//src/de/lempikbubar/src/blatt04/EuclidDistance.java=UTF-8
+encoding//src/de/lempikbubar/src/blatt04/Linie.java=UTF-8
+encoding//src/de/lempikbubar/src/blatt04/Simplex.java=UTF-8
 encoding//src/de/lempikbubar/src/exception/ParameterException.java=UTF-8
 encoding//src/de/lempikbubar/src/greedy/Fahrkartenautomat.java=UTF-8
