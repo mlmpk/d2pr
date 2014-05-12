@@ -1,4 +1,4 @@
-package de.lempikbubar.src.greedy;
+package de.lempikbubar.src.blatt05;
 
 public class Fahrkartenautomat {
 
@@ -9,14 +9,14 @@ public class Fahrkartenautomat {
 	public static String chosenCurrency;
 
 	/**
-	 * Greedy Algorithmus zur Bestimmung von Rückgeldbeträgen
+	 * Greedy Algorithmus zur Bestimmung von R??ckgeldbetr??gen
 	 * @param betrag
 	 * @param werte Array
 	 * @return
 	 */
 	public static int[] change(int betrag, int[] werte) {
 
-		changed = new int[werte.length]; // Initialisierung des Rückgabe Arrays mit dem Wert der angeforderten Währung
+		changed = new int[werte.length]; // Initialisierung des R??ckgabe Arrays mit dem Wert der angeforderten W??hrung
 
 		for (int i = 0; i < werte.length; i++) {
 			if (betrag >= werte[i]) {
@@ -51,11 +51,11 @@ public class Fahrkartenautomat {
 	}
 
 	/**
-	 * Gibt das Ergebnis des Greedy Algorithmus zur Ausgabe von Wechselgeld wieder zurück
+	 * Gibt das Ergebnis des Greedy Algorithmus zur Ausgabe von Wechselgeld wieder zur??ck
 	 */
 	private static void printResult() {
 
-		System.out.println("Eingegeben: "+change+ " Währung: " + chosenCurrency);
+		System.out.println("Eingegeben: "+change+ " W??hrung: " + chosenCurrency);
 		System.out.print("{");
 
 		if (chosenCurrency.equals("Euro")) {
