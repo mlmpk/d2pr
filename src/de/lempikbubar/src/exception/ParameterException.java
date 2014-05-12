@@ -26,6 +26,9 @@ public class ParameterException extends Exception {
 		case Statics.SECOND_PARAMETER_NOT_VALID:	
 			message = Statics.SECOND_PARAMETER_EXCEPTION_MESSAGE;
 			break;
+		case Statics.BLATT06_PARAMETER_EXCEPTION:
+			message = Statics.BLATT06_PARAMETER_EXCEPTION_MESSAGE;
+			break;
 		default:
 			message = Statics.PARAMETER_EXCEPTION_DEFAULT_MESSAGE;
 			break;
