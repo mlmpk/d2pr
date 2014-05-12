@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.StringTokenizer;
 
 import de.lempikbubar.src.config.Statics;
@@ -11,24 +12,19 @@ import de.lempikbubar.src.exception.ParameterException;
 
 public class Anwendung {
 
-	private static ArrayList<Interval> intervals;
-	//private static ArrayList<Job> jobs;
-	private static Result<?> result;
-
 	/**
 	 * Implementierung des IntervalScheduling-Algorithmus
 	 * 
 	 * @param intervals
 	 * @return
 	 */
-	public static ArrayList<Interval> intervalScheduling(
-			ArrayList<Interval> intervals) {
+	public static ArrayList<Interval> intervalScheduling(ArrayList<Interval> intervals) {
 
 		ArrayList<Interval> results = new ArrayList<>();
 		int laenge = intervals.size();
 		int j = 1;
 
-		for (int i = 1; i < laenge; i++) {
+		for (int i = 0; i < laenge; i++) {
 			if (intervals.get(i).getStart() >= intervals.get(j).getEnd()) {
 				results.add(intervals.get(i));
 				j = i;
@@ -80,41 +76,53 @@ public class Anwendung {
 		return list;
 	}
 	
+	
 	/**
-	 * Gibt das Ergebnis auf der Konsole zurück
-	 * @param erwartet ein Result Objekt
+	 * Gibt die Ergebnisliste aus
+	 * @param erwartet eine Liste vom Typ ArrayList<Interval>
 	 */
-	@SuppressWarnings("unchecked")
-	private static void printResult(@SuppressWarnings("rawtypes") Result result){
-		Object res = result.getResult() ;
-		if(res instanceof ArrayList){
-			System.out.print("[ ");
-			for (Interval s : (ArrayList<Interval>) res) {
-				System.out.print("["+s.getStart() + ", " + s.getEnd() +"] ");
-			}
-			System.out.println("]");
-		}else if(res instanceof int[]){
-			for (int s : (int[]) res) {
-				System.out.println("("+s+")");
-			}
+	private static void printResult(ArrayList<Interval> array){
+	
+		System.out.print("[");
+		for (Interval s : (ArrayList<Interval>) array) {
+			System.out.print(s.toString());
 		}
+		System.out.println("]");
+
 	}
+	
+//	private static void printResult(int[] array){
+//		
+//		System.out.print("[");
+//		for (int s : array) {
+//			System.out.print("["+s+"]");
+//		}
+//		System.out.println("]");
+//
+//	}
 	
 	public static void main(String[] args) {
 
 		try {
 
 			if (args.length == 2) {
+				
 				String type = args[0];
 				String path = args[1];
 
 				if (type.equals("Interval")) {
-					intervals = (ArrayList<Interval>) readFileAndCreateArray(path);
-					result = new Result<ArrayList<Interval>>(intervals);
-					printResult(result);
+					
+					ArrayList<Interval> intervals = (ArrayList<Interval>) readFileAndCreateArray(path);
+					printResult(intervals);
+					
+					intervals = intervalScheduling(intervals);
+					
+					Collections.sort(intervals);
+					printResult(intervals);
+					
 				} else if (type.equals("Lateness")) {
-					// jobs = (ArrayList<Job>) readFileAndCreateArray(path);
-					// result = new Result<int[]>(latenessScheduling(jobs));
+//					ArrayList<Interval> jobs = null;
+//					printResult(jobs);
 				} else {
 					throw new ParameterException(Statics.BLATT06_PARAMETER_EXCEPTION);
 				}
