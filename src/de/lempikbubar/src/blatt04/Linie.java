@@ -4,6 +4,7 @@ public class Linie {
 	private Point a;
 	private Point b;
 	private boolean steigungUndefiniert;
+	@SuppressWarnings("unused")
 	private double steigung;
 
 	public Linie(Point p1, Point p2) {

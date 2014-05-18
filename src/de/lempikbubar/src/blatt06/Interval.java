@@ -27,8 +27,11 @@ public class Interval implements Comparable<Interval> {
 
 	@Override
 	public int compareTo(Interval o) {
-		// TODO Automatisch generierter Methodenstub
-		return 0;
+		
+		if( this.getEnd()  > o.getEnd()) return 1;
+		else if(this.getEnd() < o.getEnd()) return -1;
+		else return 0;
+		
 	}
 
 

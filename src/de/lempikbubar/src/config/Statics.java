@@ -27,6 +27,6 @@ public class Statics {
 	public static final String INSERTION_SORT = "insert";
 	public static final String QUICK_SORT = "quick";
 	
-	public static final String BLATT06_PARAMETER_EXCEPTION_MESSAGE = "Aufruf ohne Parameter! Die korrekte Syntax lautet: Anwendung [Interval/Lateness][Pfad+Dateiname]";
+	public static final String BLATT06_PARAMETER_EXCEPTION_MESSAGE = "Achtung! Die korrekte Syntax lautet: Anwendung [Interval/Lateness][Pfad+Dateiname]";
 	
 }
