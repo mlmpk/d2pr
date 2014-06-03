@@ -51,7 +51,7 @@ public class LCS {
 	}
 	
 	/**
-	 * Die Methode getLengths ermitteln über zwei gegebenen Folgen die Länge der längsten Teilfolge
+	 * Die Methode getLengths ermitteln äber zwei gegebenen Folgen die Länge der längsten Teilfolge
 	 * @param firstSequence ist die erste Folge
 	 * @param secondSequence ist die zweite Folge
 	 * @param c ist das Nummernfeld zu Zwischenspeicherung der Längen
@@ -112,7 +112,7 @@ public class LCS {
 				System.out.println("Laufzeit: " + runtime + "ms.");
 				
 			} else {
-				System.out.println("Bitte Größe der Teilfolgen angeben!");
+				System.out.println("Bitte Größe der zu erzeugenden Teilfolgen angeben!");
 			}
 		} catch (NumberFormatException e) {
 			System.out.println("Der eingegebene Parameter ist keine Ganzzahl. Bitte korrigieren.");
