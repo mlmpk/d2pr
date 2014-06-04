@@ -25,20 +25,20 @@ public class EditDistance {
 			matrix[i][0] = i;
 			for (int j = 1; j < b.length() + 1; j++) {
 				
-				//int match = (a.charAt(i - 1) == b.charAt(j - 1)) ? 0 : 1; // wenn chars gleich sind, dann match = 1, sonst 0
+				int match = (a.charAt(i - 1) == b.charAt(j - 1)) ? 0 : 1; // wenn chars gleich sind, dann match = 1, sonst 0
 				
-//				int mini = matrix[i - 1][j] + 1;
-//				
-//				if (matrix[i][j - 1] + 1 < mini) {
-//					mini = matrix[i][j - 1] + 1;
-//				}
-//				
-//				if (matrix[i - 1][j - 1] + match < mini) {
-//					mini = matrix[i - 1][j - 1] + match;
-//				}
-//				matrix[i][j] = mini;
+				int mini = matrix[i - 1][j] + 1;
 				
-					matrix[i][j] = matrix[i-1][j-1];
+				if (matrix[i][j - 1] + 1 < mini) {
+					mini = matrix[i][j - 1] + 1;
+				}
+				
+				if (matrix[i - 1][j - 1] + match < mini) {
+					mini = matrix[i - 1][j - 1] + match;
+				}
+				matrix[i][j] = mini;
+				
+				/*	matrix[i][j] = matrix[i-1][j-1];
 					if(a.charAt(i-1) != (b.charAt(j-1))){
 						matrix[i][j]++;
 					}
@@ -48,7 +48,7 @@ public class EditDistance {
 					if(matrix[i][j] > matrix[i][j-1] +1){
 						matrix[i][j] = matrix[i][j-1] +1;
 					}
-				
+			*/	
 			}
 			
 //			printMatrix(matrix, a, b);
@@ -62,7 +62,13 @@ public class EditDistance {
 
 	}
 	
-	public static void printMatrix(int[][] matrix, String a, String b){
+	/**
+	 * Zeigt die Matrix an
+	 * @param matrix
+	 * @param a als String
+	 * @param b als String
+	 */
+	private static void printMatrix(int[][] matrix, String a, String b){
 		System.out.print("    ");
 		for(int i = 0; i<b.length();i++)
 		{
@@ -84,32 +90,25 @@ public class EditDistance {
 		
 	}
 
-	public static void printEditOperations(int d[][], int i, int j, char[] y){
-  		if (i>0 && d[i-1][j] + 1 == d[i][j]){
-   			printEditOperations(d,i-1, j, y);
-    		tmp[j] = y[j];
-    		System.out.println("Kosten 1: fuege " + y[j] + " an Position " + (j+1) + " ein --> " + new String(tmp));
+	public static String printEditOperations(int d[][], int i, int j, char[]x, char[] y){
+  		
+  		if(i>0 && d[i-1][j] + 1 == d[i][j])
+  		{
+  			return printEditOperations(d, i-1, j,x, y) +" Kosten 1 : " + y[j-1]+ " gelöscht | ";
   		}
-  		if (j>0 && d[i][j-1] + 1 == d[i][j]){
-      		printEditOperations(d,i, j-1, y);
-      		int n = j+1;
-      		while(tmp[n] != ' ' && n < tmp.length-1){
-        		tmp[n-1] = tmp[n];
-        		n++;
-      		}
-      		tmp[n] = ' ';
-      		System.out.println("Kosten 1: Loesche "+y[j]+" --> "+ new String(tmp));
+  		if(j>0 && d[i][j-1] + 1 == d[i][j])
+  		{
+  			return printEditOperations(d, i, j-1,x, y) + " Kosten 1 : " +y[i] +" eingefuegt | ";
   		}
- 		if (i>0 && j>0 && d[i-1][j-1] + 1 == d[i][j]){
-     	 	printEditOperations(d,i-1, j-1, y);
-      		System.out.print("Kosten 1: Ersetze " + tmp[j-1]+"  durch "+  y[i-1]);
-      		tmp[j-1] = y[i-1];
-     		System.out.println(" --> " + new String(tmp));
+  		if(i>0 && j>0 && d[i-1][j-1] + 1 == d[i][j])
+  		{
+  			return printEditOperations(d, i-1, j-1,x, y) + "Kosten 1 : "+ x[i-1] +" durch "+y[i-1]+" ersetzt | ";
   		}
-  		if (i>0 && j>0 && d[i-1][j-1]  == d[i][j]){
-   	 	  	printEditOperations(d,i-1, j-1, y);
-   			System.out.println("Kosten 0: " + tmp[j-1] + " bleibt unverändert an Stelle " + j + " --> " + new String(tmp));
+  		if(i>0 && j>0 && d[i-1][j-1] == d[i][j])
+  		{
+  			return printEditOperations(d, i-1, j-1,x, y) + "Kosten 0 : Zeichen gleich | ";
   		}
+  		return "";
 	}
 
 	public static void main(String[] args) {
@@ -163,7 +162,7 @@ public class EditDistance {
 		System.out.println("------------------------------------------------------------------");
 		if(extendedOutput){
 			tmp = a.toCharArray();
-			printEditOperations(m, m.length-1, m[0].length-1,b.toCharArray());
+			System.out.println(printEditOperations(m, m.length-1, m[0].length-1,a.toCharArray(),b.toCharArray()));
 		}
 		
 	}
@@ -205,7 +204,7 @@ public class EditDistance {
 								
 								if(extendedOutput){
 									tmp = a.toCharArray();
-									printEditOperations(m, m.length-1, m[0].length-1,b.toCharArray());
+									System.out.println(printEditOperations(m, m.length-1, m[0].length-1,a.toCharArray(),b.toCharArray()));
 								}
 							}
 
