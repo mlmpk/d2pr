@@ -88,7 +88,7 @@ public class EditDistance {
   		if (i>0 && d[i-1][j] + 1 == d[i][j]){
    			printEditOperations(d,i-1, j, y);
     		tmp[j] = y[j];
-    		System.out.println("füge " + y[j] + " an Position " + j+1 + " ein       Kosten: 1 ---> " + new String(tmp));
+    		System.out.println("Kosten 1: fuege " + y[j] + " an Position " + (j+1) + " ein --> " + new String(tmp));
   		}
   		if (j>0 && d[i][j-1] + 1 == d[i][j]){
       		printEditOperations(d,i, j-1, y);
@@ -98,17 +98,17 @@ public class EditDistance {
         		n++;
       		}
       		tmp[n] = ' ';
-      		//System.out.println(" Löschen        Kosten: 1 "+ new String(tmp));
+      		System.out.println("Kosten 1: Loesche "+y[j]+" --> "+ new String(tmp));
   		}
  		if (i>0 && j>0 && d[i-1][j-1] + 1 == d[i][j]){
      	 	printEditOperations(d,i-1, j-1, y);
-      		System.out.print(tmp[j-1]+" Ersetzen durch "+  y[i-1]+"      Kosten: 1 ");
+      		System.out.print("Kosten 1: Ersetze " + tmp[j-1]+"  durch "+  y[i-1]);
       		tmp[j-1] = y[i-1];
-     		System.out.println("--->" + new String(tmp));
+     		System.out.println(" --> " + new String(tmp));
   		}
   		if (i>0 && j>0 && d[i-1][j-1]  == d[i][j]){
    	 	  	printEditOperations(d,i-1, j-1, y);
-   			//System.out.println(tmp[j-1] +" "+ "Bleibt an der stelle" + j + "  Kosten: nix ---> " + new String(tmp));
+   			System.out.println("Kosten 0: " + tmp[j-1] + " bleibt unverändert an Stelle " + j + " --> " + new String(tmp));
   		}
 	}
 
@@ -176,10 +176,8 @@ public class EditDistance {
 
 				Distance minDistance = null;
 
-				System.out
-						.println("Berechne Editierdistanzen in jeder Kombination...");
-				System.out
-						.println("-------------------------------------------------");
+				System.out.println("Berechne Editierdistanzen in jeder Kombination...");
+				System.out.println("-------------------------------------------------");
 
 				for (int i = 0; i < lines.size(); i++) {
 					for (int j = 1; j < lines.size(); j++) {
@@ -229,8 +227,7 @@ public class EditDistance {
 				}
 
 			} else {
-				System.out
-						.println("Die Datei muss wenigstens 2 Zeilen umfassen. Bitte korrigieren.");
+				System.out.println("Die Datei muss wenigstens 2 Zeilen umfassen. Bitte korrigieren.");
 			}
 		} catch (IOException e) {
 			System.out.println("Bitte Pfadangabe und Datei überprüfen!");
