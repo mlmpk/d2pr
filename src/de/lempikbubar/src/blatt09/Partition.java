@@ -8,8 +8,8 @@ public class Partition {
 
 	/**
 	 * Implementierung des Partitionierungs-Algorithmus
-	 * @param list
-	 * @return
+	 * @param ArrayList mit Integer Values
+	 * @return true, wenn Partionierung möglich, false falls nicht
 	 */
 	public static boolean partition(ArrayList<Integer> list){
 		int w = 0;
@@ -46,10 +46,10 @@ public class Partition {
 			try {
 				ArrayList<Integer> list = new ArrayList<>();
 				for(int i = 0; i< args.length; i++){
-					list.add(Integer.valueOf(args[i]));
+					list.add(Integer.valueOf(args[i]));		// Hinzufügen der eingegebenen Parameter in eine ArrayList
 				}
 				
-				System.out.println( partition(list) );
+				System.out.println( partition(list) );		// Aufruf des Partionierungs-Algorithmus
 				
 			} catch (NumberFormatException e) {
 				System.out.println(SYNTAX_MSG);
