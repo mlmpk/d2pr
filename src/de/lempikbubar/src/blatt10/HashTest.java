@@ -6,6 +6,13 @@ public class HashTest {
 
 	public static void main(String[] args) {
 
+		
+		
+		
+//		HashTable ht = new HashTable(10);
+//		ht.put("382952709");
+//		ht.printHashTable();
+		
 		try {
 
 			if (args.length == 2) {
@@ -17,13 +24,25 @@ public class HashTest {
 					
 					HashTable ht = new HashTable(size);
 					ArrayList<String> entries = HashTable.readLines(lines);
-					
+					System.out.println("Größe: "+entries.size());
 					for (String entry : entries) {
+						if(entry.equals("382952709")){
+							long bla = GeneralHashFunctionLibrary.RSHash(entry);
+							System.out.print("longHash: "+bla+" ");
+							if(bla <0) bla = bla * -1;
+							System.out.print("longHash positive: "+bla+" ");
+							int blaInt = (int) bla;
+							System.out.print("longHash integer: "+blaInt+" ");
+							if(blaInt <0) blaInt = blaInt * -1;
+							System.out.print("longHash integer positive: "+blaInt+" ");
+							System.out.print("Entry: "+entry+" Hash: "+blaInt % 10+"\n");
+						}
 						ht.put(entry);
+						
 					}
 					
 					ht.printHashTable();
-					
+			
 				}else{
 					System.out.println("Bitte positive Ganzzahlen eingeben!");
 				}

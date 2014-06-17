@@ -5,9 +5,9 @@ public class HashItem {
 	private String key;
 	private int info;
 
-	public HashItem(String key, int info) {
+	public HashItem(String key ) {
 		this.key = key;
-		this.info = info;
+		this.info = 1;
 	}
 
 	public String getKey() {
