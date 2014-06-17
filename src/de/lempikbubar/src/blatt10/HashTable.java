@@ -9,28 +9,42 @@ import java.util.LinkedList;
 
 public class HashTable {
 
-	private LinkedList<HashItem>[] hashtab;
-	private int hashsize;
+	private LinkedList<HashItem>[] hashtable;
+	private String hashMethod = "RSHash";
 
 	@SuppressWarnings("unchecked")
-	public HashTable(int hashSize) {
-		this.hashsize = hashSize;
-		hashtab = new LinkedList[hashSize];
+	public HashTable(int hashSize, String hashMethod) {
+		
+		hashtable = new LinkedList[hashSize];
 		
 		// initialisiere das Array mit LinkedList an jeder Stelle
-		for (int i = 0; i < hashtab.length; i++) {
-			hashtab[i] = new LinkedList<HashItem>();
+		for (int i = 0; i < hashtable.length; i++) {
+			hashtable[i] = new LinkedList<HashItem>();
 		}
 
+		this.hashMethod = hashMethod;
+	}
+	
+	/**
+	 * Bildet den Hashwert
+	 * @param sequence
+	 * @return Hashwert
+	 */
+	private long getHashCode(String sequence){
+		if (hashMethod.equals("RSHash")) 
+			return GeneralHashFunctionLibrary.RSHash(sequence);
+		else
+			return GeneralHashFunctionLibrary.JSHash(sequence);
 	}
 
 	/**
-	 * Speichert ein Element in die Hashtable
+	 * Speichert Element in die Hashtable
 	 * 
 	 * @param key
 	 */
 	public void put(String key) {
 	
+		/*
 		long hashvalue = GeneralHashFunctionLibrary.RSHash(key);
 		int hash = -1;
 		if(hashvalue < 0 ){
@@ -45,30 +59,18 @@ public class HashTable {
 			if (hashvalueint < 0) hashvalueint = hashvalueint * -1;
 			hash = hashvalueint;
 		}
+		*/
 		
-		
-		LinkedList<HashItem> currentlist = hashtab[hash];
+		int hash = Math.abs((int)getHashCode(key));
+		hash = hash % hashtable.length;
 
-		if (!currentlist.isEmpty()) { // Liste an der Stelle hash ist nicht leer, daher jetzt Suche nach Vorhandensein des Items
-
-			boolean isItemInList = false;
-			for (int i = 0; i < currentlist.size(); i++) {
-				if (currentlist.get(i).getKey().equals(key)) {
-					isItemInList = true;
-					break;
-				}
-
-			}
-
-			if (!isItemInList) {
-				currentlist.add( new HashItem(key) );
-
-			}
-
-		} else { // Liste ist leer, item kann direkt eingefügt werden
-			currentlist.add(new HashItem(key) );
+		HashItem item = get(key);
+		if (item != null ) {
+			item.setInfo(get(key).getInfo()+1);
+		}else {
+			hashtable[hash].add(new HashItem(key));
 		}
-
+	
 	}
 
 	/**
@@ -80,19 +82,17 @@ public class HashTable {
 	public HashItem get(String key) {
 
 		// berechne zunächst den Hashwert des Schlüssels
-		int hash = (int)(Math.abs(GeneralHashFunctionLibrary.RSHash(key)) % hashtab.length);
-		// Hole die Liste am entsprechenden Hash
-		LinkedList<HashItem> currentList = hashtab[hash];
-
-		if (!currentList.isEmpty()) {
-			for (int i = 0; i < currentList.size(); i++) {
-				// wenn der Key übereinstimmt, return das HashItem
-				if (currentList.get(i).getKey().equals(key)) {
-					return currentList.get(i);
-				}
+		//int hash = (int)(Math.abs(GeneralHashFunctionLibrary.RSHash(key)) % hashtab.length);
+		int hash = Math.abs((int)getHashCode(key));
+		hash = hash % hashtable.length;
+		
+		for (int i = 0; i < hashtable[hash].size(); i++) {
+			// wenn der Key übereinstimmt, return das HashItem
+			if (hashtable[hash].get(i).getKey().equals(key)) {
+				return hashtable[hash].get(i);
 			}
 		}
-
+		
 		return null;
 	}
 
@@ -100,7 +100,9 @@ public class HashTable {
 	 * Löscht alles Einträge in der Hashtable
 	 */
 	public void clear() {
-		new HashTable(hashtab.length);
+		for (int i = 0; i<hashtable.length; i++) {
+			hashtable[i].clear();
+		}
 	}
 
 	/**
@@ -110,9 +112,9 @@ public class HashTable {
 	 */
 	public int numberOfCollisions() {
 		int collisions = 0;
-		for(int i = 0; i < hashtab.length; i++){
-			if(hashtab[i].size() > 1){
-				collisions = collisions + hashtab[i].size() -1;
+		for(int i = 0; i < hashtable.length; i++){
+			if(hashtable[i].size() > 1){
+				collisions = collisions + hashtable[i].size() -1;
 			}
 		}
 		return collisions;
@@ -123,10 +125,10 @@ public class HashTable {
 	 */
 	public void printHashTable() {
 
-		for (int i = 0; i < hashtab.length; i++) {
+		for (int i = 0; i < hashtable.length; i++) {
 			System.out.println("Hash items with hash value " + i);
-			for (int j = 0; j < hashtab[i].size(); j++) {
-				HashItem item = hashtab[i].get(j);
+			for (int j = 0; j < hashtable[i].size(); j++) {
+				HashItem item = hashtable[i].get(j);
 
 				System.out.println("\tkey: " + item.getKey() + " -- info: " + item.getInfo());
 
