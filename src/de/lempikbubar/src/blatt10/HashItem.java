@@ -6,7 +6,6 @@ public class HashItem {
 	private int info;
 
 	public HashItem(String key, int info) {
-		super();
 		this.key = key;
 		this.info = info;
 	}

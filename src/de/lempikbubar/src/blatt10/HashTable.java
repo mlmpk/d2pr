@@ -4,13 +4,26 @@ import java.util.LinkedList;
 
 public class HashTable {
 
-	public static LinkedList<HashItem> hashitemList;
+	public static Object[] hashArray;
 	
-	public HashTable() {
-		hashitemList = new LinkedList<>();
+	public HashTable(int hashSize) {
+		hashArray = new Object[hashSize];
+		
+		for (int i = 0; i < hashArray.length; i++) {
+			hashArray[i] = new LinkedList<HashItem>();
+		}
+		
 	}
 
 	public void put(String key) {
+		
+		long hash = GeneralHashFunctionLibrary.RSHash(key) % hashArray.length;
+		
+		HashItem item = new HashItem(key, 1);
+		
+		
+		
+		
 	}
 
 	public HashItem get(String key) {
@@ -19,6 +32,7 @@ public class HashTable {
 	}
 
 	public void clear() {
+		
 	}
 
 	public int numberOfCollisions() {
